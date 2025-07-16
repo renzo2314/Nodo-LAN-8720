@@ -1,0 +1,322 @@
+/* ===== Base styles ===== */
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #111;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+.centered-main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+#logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+#logo, #logo-svg {
+  display: block;
+  margin: 0 auto;
+  width: 120px;
+  height: 120px;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(255,255,255,0.08);
+  background: #222;
+}
+#header h1 {
+  font-family: system-ui, 'Segoe UI', Roboto, Arial, sans-serif;
+  text-align: center;
+  margin: 0 0 18px 0;
+  font-size: 2.3rem;
+  letter-spacing: 2px;
+  color: #fff;
+  text-shadow: none;
+}
+form {
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  align-items: center;
+}
+.card {
+  background: #181818;
+  border-radius: 18px;
+  box-shadow: 0 2px 12px #fff1, 0 1.5px 8px #fff1;
+  padding: 22px 18px 14px 18px;
+  margin-bottom: 0;
+  width: 100%;
+  max-width: 480px;
+  border: 1.5px solid #333;
+  backdrop-filter: none;
+}
+fieldset {
+  border: none;
+  border-radius: 12px;
+  background: #2c2f33;
+  box-shadow: 0 2px 8px #0002;
+  padding: 18px 14px 10px 14px;
+  margin-bottom: 0;
+}
+legend {
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+  font-size: 1.1rem;
+}
+label {
+  margin: 10px 0 0 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  justify-content: space-between;
+}
+input, select, button {
+  border-radius: 7px;
+  border: 1px solid #444;
+  padding: 8px 12px;
+  background: #222;
+  color: #ffffff;
+  font-size: 1rem;
+  margin-top: 2px;
+  box-sizing: border-box;
+}
+input:disabled {
+  background: #222a;
+  color: #aaa;
+}
+button {
+  background: #534d4d;
+  color: #ffffff;
+  border: none;
+  font-weight: bold;
+  box-shadow: 0 2px 8px #fff1;
+  transition: background 0.2s, transform 0.1s, box-shadow 0.2s, color 0.2s;
+  font-size: 1.08rem;
+  padding: 10px 18px;
+  margin: 6px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+}
+button .icon {
+  font-size: 1.2em;
+  margin-right: 2px;
+}
+button:hover {
+  background: #eee;
+  color: #111;
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 4px 16px #fff2;
+}
+.output-container {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+  justify-content: center;
+}
+.port {
+  flex: 1;
+  background: #232526;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px #0002;
+  padding: 12px 8px;
+}
+.port.card {
+  background: #222;
+  border-radius: 14px;
+  box-shadow: 0 1px 4px #fff1;
+  padding: 14px 8px;
+  max-width: 210px;
+  border: 1.2px solid #333;
+}
+.bf-grid {
+  display: flex;
+  gap: 16px;
+  margin-top: 10px;
+  justify-content: center;
+}
+.bf-saves, .bf-loads {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.bf-factory {
+  text-align: center;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.switch-label {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  user-select: none;
+  margin: 10px 0 0 0;
+}
+.switch-input {
+  display: none;
+}
+.switch-slider {
+  width: 46px;
+  height: 26px;
+  background: #222;
+  border-radius: 16px;
+  position: relative;
+  transition: background 0.2s;
+  box-shadow: 0 2px 8px #fff1;
+}
+.switch-slider::before {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  width: 18px;
+  height: 18px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 1px 4px #fff1;
+  transition: transform 0.2s, background 0.2s;
+}
+.switch-input:checked + .switch-slider {
+  background: #fff;
+}
+.switch-input:checked + .switch-slider::before {
+  transform: translateX(20px);
+  background: #111;
+}
+.switch-text {
+  font-weight: bold;
+  color: #fff;
+  letter-spacing: 1px;
+  font-size: 1.08rem;
+}
+/* Inputs y labels simétricos */
+.card label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  margin: 10px 0 0 0;
+}
+.card input[type="text"],
+.card input[type="number"],
+.card select {
+  width: 220px;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 8px 12px;
+  font-size: 1rem;
+  border-radius: 7px;
+  border: 1px solid #444;
+  background: #232526;
+  color: #fff;
+  margin-left: 0;
+}
+.icon {
+  display: inline-block;
+  width: 1.4em;
+  height: 1.4em;
+  vertical-align: middle;
+  margin-right: 4px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 1.2em 1.2em;
+}
+.icon-save {
+  background-image: url('data:image/svg+xml;utf8,<svg fill="none" stroke="%23fff" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="4" width="16" height="16" rx="2.5" stroke="%23fff" fill="none"/><path d="M8 4v4h8V4" stroke="%23fff"/><rect x="9" y="14" width="6" height="4" rx="1" stroke="%23fff" fill="none"/></svg>');
+}
+.icon-load {
+  background-image: url('data:image/svg+xml;utf8,<svg fill="none" stroke="%23fff" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="4" width="16" height="16" rx="2.5" stroke="%23fff" fill="none"/><path d="M12 8v6m0 0l-3-3m3 3l3-3" stroke="%23fff"/></svg>');
+}
+.icon-factory {
+  background-image: url('data:image/svg+xml;utf8,<svg fill="none" stroke="%23fff" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="8" stroke="%23fff" fill="none"/><path d="M12 8v4l3 2" stroke="%23fff"/></svg>');
+}
+.icon-check {
+  background-image: url('data:image/svg+xml;utf8,<svg fill="none" stroke="%23fff" stroke-width="2.2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" stroke="%23fff" fill="none"/><path d="M8 12.5l3 3 5-5" stroke="%23fff"/></svg>');
+}
+.bf-saves input,
+.bf-loads input,
+.bf-factory input,
+.card:last-of-type input {
+  background: #222;
+  border: 1.5px solid #444;
+  box-shadow: 0 2px 8px #0002;
+  color: #fff;
+}
+.bf-saves input:disabled,
+.bf-loads input:disabled,
+.bf-factory input:disabled,
+.card:last-of-type input:disabled {
+  background: #222;
+  color: #aaa;
+}
+@media (max-width: 700px) {
+  .centered-main {
+    padding: 18px 4vw 24px 4vw;
+  }
+  form, .card {
+    max-width: 98vw;
+    width: 98vw;
+    padding-left: 4vw;
+    padding-right: 4vw;
+    box-sizing: border-box;
+  }
+  .output-container {
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+  }
+  .port.card {
+    max-width: 98vw;
+    width: 100%;
+  }
+  .bf-grid {
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+  }
+  .bf-saves, .bf-loads {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: space-between;
+  }
+  button {
+    width: 100%;
+    min-width: 0;
+    font-size: 1rem;
+    padding: 10px 0;
+  }
+  .icon {
+    width: 1.3em;
+    height: 1.3em;
+    margin-right: 2px;
+  }
+  .card label {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  .card input[type="text"],
+  .card input[type="number"],
+  .card select {
+    width: 100%;
+    min-width: 0;
+  }
+}

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Focus 2U2 Node Setup</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main class="centered-main">
+    <div id="logo-container">
+      <img id="logo" src="/logo.png" width="120" height="120" alt="Focus 2U2 Logo" onerror="this.style.display='none';document.getElementById('logo-svg').style.display='block'">
+      <svg id="logo-svg" width="120" height="120" viewBox="0 0 120 120" style="display:none;margin:auto;">
+        <circle cx="60" cy="60" r="55" fill="#00e0ff" fill-opacity="0.15" stroke="#00e0ff" stroke-width="4"/>
+        <text x="50%" y="54%" text-anchor="middle" fill="#00e0ff" font-size="32" font-family="Segoe UI,Arial,sans-serif" dy=".3em">F2U2</text>
+      </svg>
+    </div>
+    <div id="header">
+      <h1>Focus 2U2 Node</h1>
+    </div>
+    <form id="configForm">
+      <fieldset class="card">
+        <legend>Network</legend>
+        <label class="switch-label">
+          <input type="checkbox" id="dhcpCheckbox" name="dhcp" class="switch-input">
+          <span class="switch-slider"></span>
+          <span class="switch-text">DHCP</span>
+        </label>
+        <label>IP:      <input type="text"    id="ipInput"     name="ip"></label>
+        <label>Subnet:  <input type="text"    id="subnetInput" name="subnet"></label>
+        <label>Gateway: <input type="text"    id="gatewayInput"name="gateway"></label>
+        <label>MAC:     <input type="text"    id="macInput"    disabled></label>
+      </fieldset>
+      <fieldset class="card">
+        <legend>Outputs</legend>
+        <div class="output-container">
+          <fieldset class="port card">
+            <legend>Port 1</legend>
+            <label>Protocol: <select id="outA_proto" name="outA_proto"></select></label>
+            <label>Universe: <input type="number" id="outA_uni"   name="outA_uni" min="0" max="255"></label>
+            <label>FPS:      <select id="outA_fps"   name="outA_fps"></select></label>
+          </fieldset>
+          <fieldset class="port card">
+            <legend>Port 2</legend>
+            <label>Protocol: <select id="outB_proto" name="outB_proto"></select></label>
+            <label>Universe: <input type="number" id="outB_uni"   name="outB_uni" min="0" max="255"></label>
+            <label>FPS:      <select id="outB_fps"   name="outB_fps"></select></label>
+          </fieldset>
+        </div>
+      </fieldset>
+      <fieldset class="card">
+        <legend>Device</legend>
+        <label>Name:         <input type="text" id="nameInput"    name="name"></label>
+        <label>Timeout:      <select id="timeoutSelect" name="timeout">
+          <option value="0">Off</option>
+          <option value="1000">1s</option>
+          <option value="2000">2s</option>
+          <option value="3000">3s</option>
+          <option value="4000">4s</option>
+          <option value="5000">5s</option>
+        </select></label>
+        <label>OnSourceLoss: <select id="onsourceSelect" name="onsourceloss">
+          <option value="0">OffSignal</option>
+          <option value="1">KeepSignal</option>
+          <option value="2">BlackOut</option>
+        </select></label>
+      </fieldset>
+      <fieldset class="card">
+        <legend>Backups & Factory</legend>
+        <div class="bf-grid">
+          <div class="bf-saves">
+            <button name="backup" value="1"><span class="icon icon-save" aria-label="Guardar"></span> Save Slot 1</button>
+            <button name="backup" value="2"><span class="icon icon-save" aria-label="Guardar"></span> Save Slot 2</button>
+            <button name="backup" value="3"><span class="icon icon-save" aria-label="Guardar"></span> Save Slot 3</button>
+            <button name="backup" value="4"><span class="icon icon-save" aria-label="Guardar"></span> Save Slot 4</button>
+          </div>
+          <div class="bf-loads">
+            <button name="load"   value="1"><span class="icon icon-load" aria-label="Cargar"></span> Load Slot 1</button>
+            <button name="load"   value="2"><span class="icon icon-load" aria-label="Cargar"></span> Load Slot 2</button>
+            <button name="load"   value="3"><span class="icon icon-load" aria-label="Cargar"></span> Load Slot 3</button>
+            <button name="load"   value="4"><span class="icon icon-load" aria-label="Cargar"></span> Load Slot 4</button>
+          </div>
+        </div>
+        <div class="bf-factory">
+          <button name="factory" value="1"><span class="icon icon-factory" aria-label="Restaurar"></span> Restore Factory Defaults</button>
+          <button id="saveBtn" type="submit"><span class="icon icon-check" aria-label="Guardar"></span> Save All Config</button>
+        </div>
+      </fieldset>
+    </form>
+  </main>
+  <script src="/app.js" defer></script>
+</body>
+</html>
