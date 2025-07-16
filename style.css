@@ -1,11 +1,26 @@
 /* ===== Base styles ===== */
 body {
   font-family: 'Segoe UI', Arial, sans-serif;
-  background: #111;
+  background: #111 url('/bg.webp') center center no-repeat;
+  background-size: cover;
+  position: relative;
   color: #fff;
   margin: 0;
   padding: 0;
   min-height: 100vh;
+}
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(120deg, rgba(20,20,20,0.85) 0%, rgba(40,40,40,0.7) 100%);
+  z-index: 0;
+  pointer-events: none;
+  backdrop-filter: blur(4px);
+}
+.centered-main, #logo-container, #header, form, .card {
+  position: relative;
+  z-index: 1;
 }
 .centered-main {
   min-height: 100vh;

@@ -22,13 +22,13 @@
       <fieldset class="card">
         <legend>Network</legend>
         <label class="switch-label">
-          <input type="checkbox" id="dhcpCheckbox" name="dhcp" class="switch-input">
+          <input type="checkbox" id="dhcpCheckbox" name="dhcp" class="switch-input" checked>
           <span class="switch-slider"></span>
           <span class="switch-text">DHCP</span>
         </label>
-        <label>IP:      <input type="text"    id="ipInput"     name="ip"></label>
-        <label>Subnet:  <input type="text"    id="subnetInput" name="subnet"></label>
-        <label>Gateway: <input type="text"    id="gatewayInput"name="gateway"></label>
+        <label>IP:      <input type="text"    id="ipInput"     name="ip" value="192.168.1.100"></label>
+        <label>Subnet:  <input type="text"    id="subnetInput" name="subnet" value="255.255.255.0"></label>
+        <label>Gateway: <input type="text"    id="gatewayInput"name="gateway" value="192.168.1.1"></label>
         <label>MAC:     <input type="text"    id="macInput"    disabled></label>
       </fieldset>
       <fieldset class="card">
@@ -36,34 +36,62 @@
         <div class="output-container">
           <fieldset class="port card">
             <legend>Port 1</legend>
-            <label>Protocol: <select id="outA_proto" name="outA_proto"></select></label>
-            <label>Universe: <input type="number" id="outA_uni"   name="outA_uni" min="0" max="255"></label>
-            <label>FPS:      <select id="outA_fps"   name="outA_fps"></select></label>
+            <label>Protocol: 
+              <select id="outA_proto" name="outA_proto">
+                <option value="ArtNet">ArtNet</option>
+                <option value="sACN" selected>sACN</option>
+              </select>
+            </label>
+            <label>Universe: <input type="number" id="outA_uni" name="outA_uni" min="0" max="255" value="1"></label>
+            <label>FPS:      
+              <select id="outA_fps" name="outA_fps">
+                <option value="40">40 FPS</option>
+                <option value="30" selected>30 FPS</option>
+                <option value="20">20 FPS</option>
+                <option value="10">10 FPS</option>
+              </select>
+            </label>
           </fieldset>
           <fieldset class="port card">
             <legend>Port 2</legend>
-            <label>Protocol: <select id="outB_proto" name="outB_proto"></select></label>
-            <label>Universe: <input type="number" id="outB_uni"   name="outB_uni" min="0" max="255"></label>
-            <label>FPS:      <select id="outB_fps"   name="outB_fps"></select></label>
+            <label>Protocol: 
+              <select id="outB_proto" name="outB_proto">
+                <option value="ArtNet" selected>ArtNet</option>
+                <option value="sACN">sACN</option>
+              </select>
+            </label>
+            <label>Universe: <input type="number" id="outB_uni" name="outB_uni" min="0" max="255" value="2"></label>
+            <label>FPS:      
+              <select id="outB_fps" name="outB_fps">
+                <option value="40">40 FPS</option>
+                <option value="30" selected>30 FPS</option>
+                <option value="20">20 FPS</option>
+                <option value="10">10 FPS</option>
+              </select>
+            </label>
           </fieldset>
         </div>
       </fieldset>
       <fieldset class="card">
         <legend>Device</legend>
-        <label>Name:         <input type="text" id="nameInput"    name="name"></label>
-        <label>Timeout:      <select id="timeoutSelect" name="timeout">
-          <option value="0">Off</option>
-          <option value="1000">1s</option>
-          <option value="2000">2s</option>
-          <option value="3000">3s</option>
-          <option value="4000">4s</option>
-          <option value="5000">5s</option>
-        </select></label>
-        <label>OnSourceLoss: <select id="onsourceSelect" name="onsourceloss">
-          <option value="0">OffSignal</option>
-          <option value="1">KeepSignal</option>
-          <option value="2">BlackOut</option>
-        </select></label>
+        <label>Name: <input type="text" id="nameInput" name="name" value="Focus 2U2 Node"></label>
+        <label>Timeout:      
+          <select id="timeoutSelect" name="timeout">
+            <option value="100">Off</option>
+            <option value="1000">1s</option>
+            <option value="2000" selected>2s</option>
+            <option value="3000">3s</option>
+            <option value="4000">4s</option>
+            <option value="5000">5s</option>
+          </select>
+        </label>
+        <label>OnSourceLoss: 
+          <select id="onsourceSelect" name="onsourceloss">
+            <option value="0">OffSignal</option>
+            <option value="1" selected>KeepSignal</option>
+            <option value="2">BlackOut</option>
+          </select>
+        </label>
       </fieldset>
       <fieldset class="card">
         <legend>Backups & Factory</legend>
@@ -89,5 +117,74 @@
     </form>
   </main>
   <script src="/app.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Obtener configuración actual del dispositivo
+      fetch('/config.json')
+        .then(response => response.json())
+        .then(config => {
+          // Configuración de red
+          document.getElementById('dhcpCheckbox').checked = config.dhcp === 1;
+          document.getElementById('ipInput').value = config.ip;
+          document.getElementById('subnetInput').value = config.subnet;
+          document.getElementById('gatewayInput').value = config.gateway;
+          document.getElementById('macInput').value = config.mac;
+          // Configuración de salidas
+          document.getElementById('outA_proto').value = config.outA_proto;
+          document.getElementById('outA_uni').value = config.outA_uni;
+          document.getElementById('outA_fps').value = config.outA_fps;
+          document.getElementById('outB_proto').value = config.outB_proto;
+          document.getElementById('outB_uni').value = config.outB_uni;
+          document.getElementById('outB_fps').value = config.outB_fps;
+          // Configuración del dispositivo
+          document.getElementById('nameInput').value = config.name;
+          document.getElementById('timeoutSelect').value = config.timeout;
+          document.getElementById('onsourceSelect').value = config.onsourceloss;
+          // Habilitar/deshabilitar campos según DHCP
+          toggleNetworkFields(config.dhcp === 1);
+          // Ajustar min de Universe según protocolo
+          updateUniverseMin('outA_proto', 'outA_uni');
+          updateUniverseMin('outB_proto', 'outB_uni');
+        })
+        .catch(error => {
+          console.error('Error al cargar la configuración:', error);
+        });
+
+      // Manejar cambio de DHCP
+      document.getElementById('dhcpCheckbox').addEventListener('change', function() {
+        toggleNetworkFields(this.checked);
+      });
+
+      function toggleNetworkFields(dhcpEnabled) {
+        const networkFields = [
+          document.getElementById('ipInput'),
+          document.getElementById('subnetInput'),
+          document.getElementById('gatewayInput')
+        ];
+        networkFields.forEach(field => {
+          field.disabled = dhcpEnabled;
+        });
+      }
+
+      // --- Lógica para Universe según protocolo ---
+      function updateUniverseMin(protoId, uniId) {
+        const proto = document.getElementById(protoId);
+        const uni = document.getElementById(uniId);
+        if (proto.value === 'sACN') {
+          uni.min = 1;
+          if (parseInt(uni.value) < 1) uni.value = 1;
+        } else {
+          uni.min = 0;
+          if (parseInt(uni.value) < 0) uni.value = 0;
+        }
+      }
+      document.getElementById('outA_proto').addEventListener('change', function() {
+        updateUniverseMin('outA_proto', 'outA_uni');
+      });
+      document.getElementById('outB_proto').addEventListener('change', function() {
+        updateUniverseMin('outB_proto', 'outB_uni');
+      });
+    });
+  </script>
 </body>
 </html>
